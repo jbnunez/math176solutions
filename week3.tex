@@ -1,0 +1,206 @@
+\documentclass[12pt]{article}
+\usepackage{url,graphicx,tabularx,array,geometry,amsmath,amssymb,amsthm,lipsum,hyperref}
+\setlength{\parskip}{1ex} %--skip lines between paragraphs
+\setlength{\parindent}{0pt} %--don't indent paragraphs
+
+%-- Commands for header
+\renewcommand{\title}[1]{\textbf{#1}\\}
+\renewcommand{\line}{\begin{tabularx}{\textwidth}{X>{\raggedleft}X}\hline\\\end{tabularx}\\[-0.5cm]}
+\newcommand{\leftright}[2]{\begin{tabularx}{\textwidth}{X>{\raggedleft}X}#1%
+& #2\\\end{tabularx}\\[-0.5cm]}
+
+\newcommand{\unionf}{\bigcup_{n=1}^{\infty} \mathcal{F}_n}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Rad}{\text{Rad}}
+
+\newcommand{\Hi}{\mathcal{H}}
+\newcommand{\Aseq}{\{A_k\}_{k=1}^{\infty}}
+\newcommand{\unionA}{\bigcup_{k=1}^{\infty} A_k}
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+
+%\linespread{2} %-- Uncomment for Double Space
+\begin{document}
+
+\title{Math 176 F18: Week 3}
+\line
+\leftright{Due: Sept. 24, 2018}{Nunez, Joseph, \texttt{jbnunez@hmc.edu}} %-- left and right positions in the header
+
+Starting with our original ideal $I$ and the polynomial $g\in I(V(I))$, define a new ideal $J$ in the slightly larger polynomial ring $k[x_1,\dots,x_n,x_{n+1}]$, by setting 
+\[J = \langle f_1,\dots,f_r, x_{n+1}g-1\rangle\]
+%Then $V(I)\neq \emptyset$, i.e. there exists $(a_1,\dots,a_n)\in k^n$ such that $f(a_1,\dots,a_n)=0$ for all $f\in I$.
+
+\begin{enumerate}
+
+	\item \textbf{4.3.9} (Cont. from last week) There exists no $f\in \C[x,y]$ such that $V(f)=\{(0,0)\}$.  (Class)
+	
+	Suppose to the contrary that there does exist some $f$ such that $f(0,0)=0$.  
+	\[f(x,y) = f_0(x)+f_1(x)y+\dots+f_n(x)y^n\]
+	for some $n$.  If for all $i$, $f_i(x)=0$, then $f(0,y)=0$.  Then there exists $f_j$ s.t. $f_j\neq 0$, the there exists $M\neq 0$ such that $f_j(M)\neq 0$.  Then $f(M,y_0)=0$ contradicting $V(f)=\{(0,0)\}$.
+	
+ 
+ 	\item \textbf{4.4.3} Suppose $g\in I(V(I))$, or in other words $g(a_1,\dots,a_n)=0$ 
+ 	for all $(a_1,\dots,a_n)\in V(\langle f_1,\dots,f_r\rangle)$.  
+ 	For $J=\langle f_1,\dots,f_r, x_{n+1}g-1\rangle$, show $V(J)=\emptyset$. (Called trick of Rabinowitsch)
+ 	
+ 	Let $a\in \A^{n+1}(k)$.  First, suppose that the first $n$ components of $a$ belong to $V(\langle f_1,\dots,f_r\rangle)$.  Since $g\in I(V(I))$, $g$ evaluates to zero over the first $n$ components. Then $x_{n+1}g-1$ is equal to $x_{n+1}(0)-1=-1$, so $V(J)$ cannot contain any elements $a$ for which the first $n$ components of $a$ belong to $V(\langle f_1,\dots,f_r\rangle)$.  Next, suppose that the first $n$ components of $a$ do not belong to $V(\langle f_1,\dots,f_r\rangle)$.   Then for some $h\in \langle f_1,\dots,f_r\rangle$, $h$ does not evaluate to zero over these elements, so this element cannot be in $V(J)$ since $h\in J$.  Therefore there are no $a$ that can belong to $V(J)$, hence $V(J)=\emptyset$.
+ 	
+ 	\item \textbf{4.4.4} Assuming the Weak Nullstellensatz, show that $J$ is not a proper ideal and hence that there exists $A_1, \dots, A_r, B$ in $k[x_1,\dots,x_m, x_{n+1}]$ such that 
+ 	\[1 = A_1f_1+\dots +A_rf_r + B(x_{n+1}g-1)\]
+ 	
+ 	By the Weak Nullstellansatz, if $J$ is a proper ideal, then $V(J)\neq \emptyset$.  However, as we just showed in the previous problem, $V(J)=\emptyset$, so $J$ is not a proper ideal.  Additionally, notice that $f=A_1f_1+\dots +A_rf_r \in I$, so for all $a\in V(\langle f_1,\dots,f_r\rangle)$, $f(a)=0$.  Then if we take $x\in \A^{n+1}(k)$ such that $a$ is equal to the first $n$ elements of $x$, then $f(x)=0$ and $x_{n+1}g-1=-1$.  Then if we set $B=-1$, we get 
+ 	 	\[1 = A_1f_1+\dots +A_rf_r + B(x_{n+1}g-1)\]
+
+ 	\item \textbf{4.4.5} Let $x_{n+1} = \frac{1}{y}$.  Show there exists $N>0$ and polynomials $C_1, \dots, C_r, D$ in $k[x_1,\dots,x_n,y]$ with
+ 	\[y^N=C_1f_1+\dots+C_rf_r+D(g-y)\]
+ 	by clearing denominators (Class)
+ 	
+ 	Take $x_{n+1} = \frac{1}{y}$, then 
+ 	\[1 = A_1f_1+\dots +A_rf_r + B(\frac{g}{y}-1) = A_1f_1+\dots +A_rf_r + \frac{B(g-y)}{y}\]
+ 	Multiply through by $y^m$, where $m$ was the maximal power of $x^{n+1}$ is the original $f_i$s:
+ 	\[y = y^{\alpha_1}A_1f_1+\dots +^{\alpha_r}A_rf_r + y^{m-1}B(g-y)\]
+ 	Define each $C_i = y^{\alpha_i}A_i$ and $D=y^{m-1}B$
+ 	
+ 	\item \textbf{4.4.6} Letting $y=g$ show that $g^N\in I$ and hence $g\in \Rad(I)$
+ 
+ If we now take $y=g$, then we get
+ \[y^N=C_1f_1+\dots+C_rf_r+D(0) =C_1f_1+\dots+C_rf_r\]
+ where $C_i \in k[x_1,\dots, x_n]$ since $y =g\in k[x_1,\dots, x_n]$.  Thus $y^N$ belongs to $\langle f_1,\dots,f_r\rangle$.
+ Then $y^N \in I$, thus $y\in \Rad(I)$, so $g\in \Rad(I)$
+ 	
+ 	\item \textbf{4.5.1} Prove the Weak Nullstellensatz for $n=1$. (Attempted)
+ 	
+ 	Let $k$ be an algebraicly closed field and $I$ be a proper ideal of $k[x]$.  Suppose that $V(I)=\emptyset$.  Then there exist no $x\in k$ such that $f(x)=0$ for all $f\in I$.  However, since $\emptyset$ is trivially a subset of the vanishing set for every polynomial, $V(f) \supset \emptyset \forall f\in k[x]$, so $f\in I$.  Thus $I\supseteq k[x]$, hence $I=k[x]$, which contradicts the assumption that $I$ is proper.  Thus $V(I)\neq \emptyset$.  Thus the Weak Nullstellensatz holds for $n=1$.
+ 	
+ 	By alg. closure $k[x]$ is a PID, so $I=(p)$ for some $p\in k[x]$.  Then $V(I)=V(p)$.  Because $k$ is alg. closed, $p$ has $\deg(p) \neq 0$ zeros counting multiplicity.  Then $V(p) \neq \emptyset \implies V(I)\neq \emptyset$.  Note that if $\deg(p)=0$ then $V(I)=k$.
+ 	
+ 	\item \textbf{4.5.15} (Weak Nullstellensatz---Version 2).  Let $k$ be an algebraicly closed field.  An ideal $I$ in $k[x_1,\dots,x_n]$ is maximal if and only if there are elements $a_i\in k$ such that $I$ is the ideal generated by the elements $x_i-a_i$; that is $I=\langle x_1-a_1, \dots, x_n-a_n \rangle$.  (Attempted)
+ 	
+ 	  Forwards: Let $I$ be a maximal ideal.  Then $V(I)\neq \emptyset$.  Let $a \in V(I)$.  Then $\{a\}\subseteq V(I)$.  Then $I(\{a\}) \supseteq I(V(I)) \supseteq I$.  Since $I$ is maximal, we must have  $I(\{a\}) = I(V(I)) = I$.  Since $\{a\}$ is algebraic, $V(\langle x_1-a_1, \dots, x_n-a_n \rangle) = \{a\}$, so $I=\langle x_1-a_1, \dots, x_n-a_n \rangle$.
+ 	  
+ 	  Reverse: Let $I=\langle x_1-a_1, \dots, x_n-a_n \rangle$.  Then $V(I) = (a_1,\dots,a_n)$.  Suppose that $J\supseteq I$.  Then $V(J)\neq \emptyset$, but $V(J)\subset V(I)$.  $V(J) = \{(a_1,\dots, a_n)\}$, so $J=I$, hence $I$ is maximal.
+ 	
+ 	\item \textbf{4.5.16} Let $I=\langle x^2+1 \rangle \subset \R[x]$ and show that $I(V(I)) \neq \Rad(I)$. (Attempted)
+ 	
+ 	Notice that $V(I)=\emptyset$ since $X^2$ is nonnegative over the reals, hence $I(V(I))$ contains all polynomials with no real roots.  
+ 	%Then $x^2+2 \in I(V(I))$ since it also has no real roots.  
+ 	%However, no power of $x^2+2$ will ever become a power of $x^2+1$ because the trailing terms will not match.
+ 	If $p^n=(x^2+1)q$, then $x^2+1 | p$ because $x^2+1$ is prime.  $x^2+1=ab$, then $\deg(a)+\deg(b)=2$.  WLOG, if $\deg(a)=2$, then $\deg(b)=0$, so $b$ is a unit.  Else $\deg(a)=\deg(b)=1$, so $a=cx+b$, hence $\frac{-d}{c}$ is a root of $a$, so $\Rad(I)$ is nonempty, hence $\Rad(I)\neq I(V(I))$
+ 	
+ 	
+ 	
+ 	\item \textbf{4.5.17} Show that $I=\langle x^2 +y^2 \rangle$ and $\langle x,y \rangle$ are radical ideals in $\R[x,y]$ with $V(I)=V(J)$.  This demonstrates that the correspondence between algebraic sets and radical ideals is not one-to-one over $\R$.
+ 	
+\[V(I) = \{(x,y): x^2+y^2=0\} = \{(0,0)\}\]
+\[V(J) = \{(x,y): x=0, y=0\} = \{(0,0)\}\]
+Take $p\in \Rad(I)$, then for some $n>0$, $p^n\in I$, hence $p^n=( x^2+y^2)f(x,y)$.  We wish to show that $( x^2+y^2)$ is prime, hence irreducible.  Suppose $( x^2+y^2) = (ax+by+c)(dx+ey+f)$.  Then we would have a nonzer constant.  $p\in I$, hence $\Rad(I)\subseteq I$.
+
+Take $p\in \Rad(J)$.  Then $p^n = xf(x,y)+yg(x,y)$.  Then $p^n(0,0)=0$, hence $p(0,0)=0$, so $p\in J$.
+
+ 	
+ 	Note first that all ideals are contained by their radical, since for any $I$, if $f\in I$, then $f\in \Rad(I)$ since $f^1 \in I$.  Thus $I\subseteq \Rad (I)$ for all ideals $I$.  Thus to show an ideal is radical, we need only show that $\Rad(I) \subset I$.  
+ 	
+ 	Let $f\in \Rad(I)$.  Then $f^n \in I$.  
+ 	
+
+   
+\end{enumerate}
+
+
+Hard Fact: let $k$ be an infinite field and
+\[R=k[a_1,\dots,a_n]\]
+(polynomials in $a_1,\dots,a_n$ with coefficients in $k$, and there may be relations among $a_i$, e.g. $a_1a_2=a_3$)
+   
+   \[\begin{matrix}
+   \text{ring}: +,\times & -- &\text{algebra}: +,\times,\cdot \\
+	\vline & ~ & \vline \\   
+    \text{group}: + & -- & \text{vector space (module)}: +,\cdot
+   \end{matrix}\]
+   
+   BTW: Thm: if $R$ is a finitely generated $k$-algebra, then $R\cong k[x_1,\dots,x_n]/I$ for some ideal $I$.
+   
+   If $R$ is a field, then $R$ is algebraic over $k$.
+   
+   $\forall i=1,\dots,n \exists fi\in k[x]$ such that $f_i(a_i)=0$
+   
+   BTW: $k\subseteq R$, $R$ is called a field extension of $k$.
+   
+   Remark (about David Hilbert): Hilbert is responsible for the proof of Weak Nullstellansatz.
+   
+   Nullstellansatz: Let $k$ be algebraically closed ($k=\bar{k}$)
+   \begin{enumerate}
+   \item Every maximal ideal of $A=k[x_1,\dots,x_n]$ is of the form $m_p=(x_1-a_1, x_2-a_2,\dots, x_n-a_n)$ 
+   for some point $p=(a_1,\dots,a_n) \in \A^n_k$, i.e. $m_p=I(p)$
+   \item Let $J\subseteq A$ be an ideal.  If $J\subsetneq A$, then $V(J)\neq \emptyset$, i.e. $J\neq (1) \implies V(J)\neq \emptyset$.  Contrapositively, $V(J)=\emptyset \implies V(J)=A$. 
+   \item For any $J\subseteq A$, $I(V(J))=\Rad(J)$ (Strong NSS)
+   \end{enumerate}
+   
+   \begin{proof}
+   \begin{enumerate}
+   \item Let $m$ be a maximal ideal of $A=k[x_1,\dots,x_n]$.  Then $A/m$ is a field.  But $A$ is finietely generated by $x_1,\dots,x_n$ over $k$.  thus by our hard fact, $k\subseteq A/m$ is an algebraic extension.  But $k$ is algebraic closed, so $k=A/m$ (or $\cong$)
+   $k\hookrightarrow_\ell k[x_1,\dots,x_n]\to_\pi A/m$, $\phi: k\to A/m$.
+   Let $\pi(x_i)=b_i$.  Let $a_i=\phi^{-1}(b_i)\in k$.  Then $x_i-a_i\in \ker \pi = m$.  Thus $(x_1-a_1, x_2-a_2,\dots, x_n-a_n)\subseteq m$.  But $(x_1-a_1, x_2-a_2,\dots, x_n-a_n)$ is a maximal ideal.  Thus $(x_1-a_1, x_2-a_2,\dots, x_n-a_n)=m$.
+   Note $k[x_1,\dots,x_n]/(x_1-a_1, x_2-a_2,\dots, x_n-a_n) \cong k$.  $\psi:k[x_1,\dots,x_n]\to k$, $\psi(x_i)=a_i$, $\psi(f)=f(a_1,\dots,a_n)$.  The difficult part is proving $\ker\psi$.
+   \item Suppose $J\subsetneq A$. By the ACC, there exists a maximal ideal containing $J$.  By the previous part, there exists $p\in \A^n_k$ such that $p=(a_1,\dots,a_n)$ and $m=(x_1-a_1, x_2-a_2,\dots, x_n-a_n)$.  Then $f(p)=0 \forall f\in m$, so $V(J)\neq\emptyset$.
+   \item already proved
+   \end{enumerate}
+   \end{proof}
+   
+   
+% HIDDEN SECTIONS
+% =============================================================================================================
+% This section gives you some things you can copy and paste for when you need lists, figure, and math notation.
+
+
+% Figure with caption and label (labels are for referencing):
+% -----------------------------------------------------------
+% \begin{figure}[htbp]
+%   \centering
+%   \caption{Source-Channel Diagram: (P) part-of-speech, (T) word token.}
+%   \includegraphics[width=.5\linewidth]{images/hw_1_1B.pdf}
+%   \label{fig:source-channel-B}
+% \end{figure}
+
+
+% Enumerated list:
+% -----------------        
+% \begin{enumerate}
+%    \item Item 1
+%    \item 2
+% \end{enumerate}
+
+% Multiline equation with numbers:
+% ------------------------------------
+%    \begin{align}
+%        C^* &= \argmax_{C} \mathbb{P}(C|G) \\
+%            &= \argmax_{C} \mathbb{P}(C)\mathbb{P}(G|C).
+%    \end{align}
+
+% Multiline equation without numbers:
+% ------------------------------------
+%    \begin{align*}
+%        C^* &= \argmax_{C} \mathbb{P}(C|G) \\
+%            &= \argmax_{C} \mathbb{P}(C)\mathbb{P}(G|C).
+%    \end{align*}        
+ 
+% Math notation:
+% --------------
+% Inline equations are done like $\textbox{this} E = MC^2$. If you want an unnumbered equation on its own line, use double dollar signs $$x \in \mathcal{X} \bigcup \mathcal{Y}$$.
+%
+% \[ 
+%   \E[\log_2 X] = \int_{a}^{b} p(x) \log_2 x dx.
+% \]
+%
+%
+
+% REFERENCES (use BibTeX, with a file named references.bib, for example. Just Google BibTex to see how to use it.):
+% --------------
+% \bibliographystyle{plain}
+% \bibliography{references}
+
+\end{document}
